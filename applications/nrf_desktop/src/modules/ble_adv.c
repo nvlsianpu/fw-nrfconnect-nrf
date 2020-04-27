@@ -193,16 +193,18 @@ static int ble_adv_start_directed(const bt_addr_le_t *addr, bool fast_adv)
 
 	if (fast_adv) {
 		LOG_INF("Use fast advertising");
-		adv_param = *BT_LE_ADV_CONN_DIR;
+		adv_param = *BT_LE_ADV_CONN_DIR(addr);
 	} else {
-		adv_param = *BT_LE_ADV_CONN_DIR_LOW_DUTY;
+		adv_param = *BT_LE_ADV_CONN_DIR_LOW_DUTY(addr);
 	}
 
 	adv_param.id = cur_identity;
 
-	struct bt_conn *conn = bt_conn_create_slave_le(addr, &adv_param);
+	struct bt_conn *conn = NULL;
 
-	if (conn == NULL) {
+	int rc = bt_le_adv_start(&adv_param, NULL, 0, NULL, 0);
+
+	if (conn == NULL || rc) {
 		return -ENOMEM;
 	}
 
