@@ -104,6 +104,20 @@ sdk-nrfxlib
 
 See the changelog for each library in the :doc:`nrfxlib documentation <nrfxlib:README>` for the most current information.
 
+sdk-mcumgr
+==========
+
+The mcumgr library fork in |NCS| contains all commits from the upstream mcumgr
+up to and including snapshot ``a3d5117b08``.
+
+* Changes:
+
+  * Fixed issue with devices mcuboot version 1.6.0 and earlier where power outage
+    during erase of corrupted image in slot-1 could lead to device not being able to boot
+    nor update with mcumgr returning error code 6 (MGMT_ERR_EBADSTATE).
+  * Added support for invoking shell commands (shell management) with mcumgr command line.
+  * Removed broken log management support.
+
 Zephyr
 ======
 
@@ -159,3 +173,8 @@ For the list of the most recent additions specific to |NCS|, see :ref:`ncs_relea
   * File systems:
 
     * Enabled FCB to work with non-0xff erase value flash.
+    * Enabled FCB to work with non-0xff erase value flash.
+    * Added ``CONFIG_FS_MOUNT_FLAG_NO_FORMAT`` flag to FATFS Kconfig options, that removes formatting capabilities from FAT FS;
+      the option also prevents unformatted devices to be formatted to FAT FS on mount attempt.
+    * Added support for ``fs_mount()`` flags: ``FS_MOUNT_FLAG_READ_ONLY`` and ``FS_MOUNT_FLAG_NO_FORMAT``.
+    * The runtime check of FS API of a driver interface will not be perfromed when ``CONFIG_NO_RUNTIME_CHECKS`` option is enabled.
