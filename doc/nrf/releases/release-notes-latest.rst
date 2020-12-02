@@ -102,6 +102,21 @@ The list of the most important recent changes can be found in :ref:`ncs_release_
   * Usage of --confirm implies --pad.
   * Fixed 'custom_tlvs' argument handling.
 
+sdk-mcumgr
+==========
+
+The mcumgr library fork in |NCS| contains all commits from the upstream mcumgr
+up to and including snapshot ``a3d5117b08``.
+
+* Changes:
+
+  * Fixed issue with devices mcuboot version 1.6.0 and earlier where power outage
+    during erase of corrupted image in slot-1 could lead to device not being able to boot
+    nor update with mcumgr returning error code 6 (MGMT_ERR_EBADSTATE).
+  * Added support for invoking shell commands (shell management) with mcumgr command line.
+  * Removed broken log management support.
+
+
 sdk-nrfxlib
 ===========
 
@@ -163,3 +178,13 @@ For the list of the most recent additions specific to |NCS|, see :ref:`ncs_relea
   * File Systems
 
     * Enabled FCB to work with non-0xff erase value flash.
+    * Added ``CONFIG_FILE_SYSTEM_MAX_FILE_NAME`` that allows to configure the maximal length of a file name.
+    * Added support for registering out of the tree file system drivers.
+    * Added ``CONFIG_FS_FATFS_EXFAT`` that enables the exFAT support.
+    * Added support for open flags within the ``fs_open()`` function.
+    * Fixed POSIX ``lseek()`` to return a new file position instead of the 0 when successful.
+    * Fixed possible system crash when file operations are performed on closed files.
+    * Fixed NVS going into an endless loop in a case when the garbage collector tries to clean up a corrupted system in search of free nodes.
+    * Fixed FAT FS driver leaking memory when invocation of ``fs_open()`` or ``fs_opendir()`` concludes with an error.
+    * Moved initialization of LittleFS to ``POST_KERNEL`` to make it available to sub-systems starting prior to application.
+    * Fix NVS failing on devices with block size >= 256B.
