@@ -76,6 +76,21 @@ sdk-mcuboot
 The MCUboot fork in |NCS| contains all commits from the upstream MCUboot repository up to and including ``5a6e18148d``, plus some |NCS| specific additions.
 The list of the most important recent changes can be found in :ref:`ncs_release_notes_140`.
 
+sdk-mcumgr
+==========
+
+The mcumgr library fork in |NCS| contains all commits from the upstream mcumgr
+up to and including snapshot ``a3d5117b08``.
+
+* Changes:
+
+  * Fixed issue with devices mcuboot version 1.6.0 and earlier where power outage
+    during erase of corrupted image in slot-1 could lead to device not being able to boot
+    nor update with mcumgr returning error code 6 (MGMT_ERR_EBADSTATE).
+  * Added support for invoking shell commands (shell management) with mcumgr command line.
+  * Removed broken log management support.
+
+
 sdk-nrfxlib
 ===========
 
@@ -92,6 +107,16 @@ sdk-zephyr
 The Zephyr fork in |NCS| contains all commits from the upstream Zephyr repository up to and including ``7a3b253ced``, plus some |NCS| specific additions.
 
 For a complete list of upstream Zephyr commits incorporated into |NCS| since the most recent release, run the following command from the :file:`ncs/zephyr` repository (after running ``west update``):
+
+* File Systems
+
+     * Enabled FCB to work with non-0xff erase value flash.
+     * Added ``CONFIG_FS_MOUNT_FLAG_NO_FORMAT`` flag to FATFS Kconfig options, that removes formatting capabilities from FAT FS;
+       the option also prevents unformatted devices to be formatted to FAT FS on mount attempt.
+     * Added support for ``fs_mount()`` flags: ``FS_MOUNT_FLAG_READ_ONLY`` and ``FS_MOUNT_FLAG_NO_FORMAT``.
+     * The runtime check of FS API of a driver interface will not be perfromed when ``CONFIG_NO_RUNTIME_CHECKS`` option is enabled.
+
+.. NOTE TO MAINTAINERS: The latest Zephyr commit appears in multiple places; make sure you update them all.
 
 .. code-block:: none
 
