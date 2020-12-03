@@ -72,35 +72,32 @@ sdk-mcuboot
 -----------
 
 The MCUboot fork in |NCS| contains all commits from the upstream MCUboot repository up to and including ``c74c551ed6``, plus some |NCS| specific additions.
-The list of the most important recent changes can be found in :ref:`ncs_release_notes_140`.
 
-* bootloader
+* Bootloader:
 
-  * Added hardening against hardware level fault injection and timing attacks,
-    see ``CONFIG_BOOT_FIH_PROFILE_HIGH`` and similar kconfig options.
-  * Introduced Abstract crypto primitives to simplify porting.
-  * Added ram-load upgrade mode (not enabled for zephy-rtos yet).
-  * Renamed single-image mode to single-slot mode,
-    see ``CONFIG_SINGLE_APPLICATION_SLOT``.
-  * Added patch for turning off cache for Cortex M7 before chain-loading.
-  * Fixed issue causing that HW stack protection catches the chain-loaded
-    application during its early initialization.
+  * Added hardening against hardware level fault injection and timing attacks.
+    See ``CONFIG_BOOT_FIH_PROFILE_HIGH`` and similar Kconfig options.
+  * Introduced abstract crypto primitives to simplify porting.
+  * Added ram-load upgrade mode (not enabled for Zephyr yet).
+  * Renamed single-image mode to single-slot mode.
+    See the ``CONFIG_SINGLE_APPLICATION_SLOT`` option.
+  * Added a patch for turning off cache for Cortex-M7 before chain-loading.
+  * Fixed an issue that caused HW stack protection to catch the chain-loaded application during its early initialization.
   * Added reset of Cortex SPLIM registers before boot.
-  * Fixesd build issue that occurs if CONF_FILE contains multiple file paths
-    instead of single file path.
-  * Added watchdog feed on nRF devices. See ``CONFIG_BOOT_WATCHDOG_FEED`` option.
-  * Removed the flash_area_read_is_empty() port implementation function.
-  * Initialize the ARM core configuration only when selected by the user,
-    see ``CONFIG_MCUBOOT_CLEANUP_ARM_CORE``.
-  * Allow the final data chunk in the image to be unaligned in
-    the serial-recovery protocol.
+  * Fixed a build issue that occurred if the CONF_FILE contained multiple file paths instead of a single file path.
+  * Added watchdog feed on nRF devices.
+    See the ``CONFIG_BOOT_WATCHDOG_FEED`` option.
+  * Removed the ``flash_area_read_is_empty()`` port implementation function.
+  * Updated the ARM core configuration to only be initialized when selected by the user.
+    See the ``CONFIG_MCUBOOT_CLEANUP_ARM_CORE`` option.
+  * Allowed the final data chunk in the image to be unaligned in the serial-recovery protocol.
 
-* imgtool
+* Image tool:
 
-  * Print image digest during verify.
-  * Add possibility to set confirm flag for hex files as well.
-  * Usage of --confirm implies --pad.
-  * Fixed 'custom_tlvs' argument handling.
+  * Updated the tool to print an image digest during verification.
+  * Added a possibility to set a confirm flag for HEX files as well.
+  * Updated the usage of ``--confirm`` to imply ``--pad``.
+  * Fixed the argument handling of ``custom_tlvs``.
 
 sdk-nrfxlib
 ===========
@@ -134,32 +131,31 @@ See the :ref:`Zephyr 2.4.0 release notes <zephyr:zephyr_2.4>` for a list of chan
 
 For the list of the most recent additions specific to |NCS|, see :ref:`ncs_release_notes_140`.
 
-* Drivers and Sensors
+* Drivers and sensors:
 
-  * Flash
+  * Flash:
 
-    * Add support for nRF53 Series SoCs in  nRF QSPI NOR flash driver (nrf_qspi_nor).
+    * Added support for nRF53 Series SoCs in the nRF QSPI NOR flash driver (nrf_qspi_nor).
 
-  * USB
+  * USB:
 
-    * Made USB DFU class compatible with the target configuration that does not
-      have a secondary image slot.
-    * Support to use USB DFU within MCUBoot with single application slot mode.
-
-
-* Libraries / Subsystems
-
-  * Settings
-
-    * Removed SETTINGS_USE_BASE64 support as its been deprecated for more than two releases.
-
-  * Storage
-
-    * flash_map: Added API to get the value of an erased byte in the flash_area, see ``flash_area_erased_val()``
-
-    * stream_flash: Eliminated the usage of the flash API internals.
+    * Made the USB DFU class compatible with the target configuration that does not have a secondary image slot.
+    * Added support for using USB DFU within MCUboot with single application slot mode.
 
 
-  * File Systems
+* Libraries/subsystems:
+
+  * Settings:
+
+    * Removed SETTINGS_USE_BASE64 support, which has been deprecated for more than two releases.
+
+  * Storage:
+
+    * :ref:`flash_map_api`: Added an API to get the value of an erased byte in the flash_area.
+      See :c:func:`flash_area_erased_val`.
+    * :ref:`stream_flash`: Eliminated the usage of the flash API internals.
+
+
+  * File systems:
 
     * Enabled FCB to work with non-0xff erase value flash.
