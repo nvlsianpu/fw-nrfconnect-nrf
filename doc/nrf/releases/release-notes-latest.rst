@@ -363,6 +363,12 @@ The following list summarizes the most important changes inherited from upstream
 
     * Added multiple ``nrfx_power``-related fixes to reduce power consumption.
 
+  * PWM:
+
+    * Changed GPIO configuration to Nordic HAL which allows support for GPIO  pins above 31.
+    * Added check if PWM period does not exceed 16-bit value to prevent broken behaviour.
+    * Changed PWM DT configuration to use timer phandle instead of previously used timer-instance.
+
   * Regulator:
 
     * Introduced a new regulator driver infrastructure.
@@ -436,6 +442,10 @@ The following list summarizes the most important changes inherited from upstream
       * :option:`CONFIG_OPENTHREAD_MAC_SOFTWARE_RETRANSMIT_ENABLE`
       * :option:`CONFIG_OPENTHREAD_PLATFORM_USEC_TIMER_ENABLE`
       * :option:`CONFIG_OPENTHREAD_CONFIG_PLATFORM_INFO`
+      * :option:`CONFIG_OPENTHREAD_CONFIG_RADIO_LINK_IEEE_802_15_4_ENABLE`
+      * :option:`CONFIG_OPENTHREAD_CONFIG_RADIO_LINK_TREL_ENABLE`
+      * :option:`CONFIG_OPENTHREAD_CONFIG_CSL_SAMPLE_WINDOW`
+      * :option:`OPENTHREAD_CONFIG_CSL_RECEIVE_TIME_AHEAD`
 
   * MQTT:
 
@@ -472,7 +482,6 @@ The following list summarizes the most important changes inherited from upstream
     * :ref:`flash_map_api`: Added an API to get the value of an erased byte in the flash_area.
       See :c:func:`flash_area_erased_val`.
     * :ref:`stream_flash`: Eliminated the usage of the flash API internals.
-
 
   * File systems:
 
