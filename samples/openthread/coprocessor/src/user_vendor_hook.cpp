@@ -125,27 +125,32 @@ class NcpVendorUart : public ot::Ncp::NcpHdlc
 
     static int SendHdlc(const uint8_t *aBuf, uint16_t aBufLength)
     {
-        OT_UNUSED_VARIABLE(aBuf);
-        OT_UNUSED_VARIABLE(aBufLength);
-        return 0;
+        return mSendCallback(aBuf, aBufLength);
     }
 
 public:
-    NcpVendorUart(ot::Instance *aInstance)
+    NcpVendorUart(ot::Instance *aInstance, otNcpHdlcSendCallback aSendCallback)
         : ot::Ncp::NcpHdlc(aInstance, &NcpVendorUart::SendHdlc)
     {
+        OT_ASSERT(aSendCallback);
+        mSendCallback = aSendCallback;
     }
 
     // Add public/private methods or member variables
+private:
+    static otNcpHdlcSendCallback mSendCallback;
 };
+
+otNcpHdlcSendCallback NcpVendorUart::mSendCallback;
 
 static OT_DEFINE_ALIGNED_VAR(sNcpVendorRaw, sizeof(NcpVendorUart), uint64_t);
 
-extern "C" void otNcpInit(otInstance *aInstance)
+
+extern "C" void otNcpHdlcInit(otInstance *aInstance, otNcpHdlcSendCallback aSendCallback)
 {
     NcpVendorUart *ncpVendor = NULL;
-    ot::Instance *instance  = static_cast<ot::Instance *>(aInstance);
+    ot::Instance *instance = static_cast<ot::Instance *>(aInstance);
 
-    ncpVendor = new (&sNcpVendorRaw) NcpVendorUart(instance);
+    ncpVendor = new (&sNcpVendorRaw) NcpVendorUart(instance, aSendCallback);
 }
 #endif
