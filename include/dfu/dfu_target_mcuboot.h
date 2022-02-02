@@ -95,6 +95,8 @@ int dfu_target_mcuboot_write(const void *const buf, size_t len);
  */
 int dfu_target_mcuboot_done(bool successful);
 
+int dfu_target_mcuboot_schedule_update(int img_num);
+
 #ifdef __cplusplus
 }
 #endif

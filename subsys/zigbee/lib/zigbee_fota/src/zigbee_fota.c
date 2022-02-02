@@ -354,6 +354,10 @@ static zb_uint8_t ota_process_firmware(zb_uint8_t *data, uint32_t len,
 		ota_ctx.mandatory_header_finished = false;
 
 		err = dfu_target_done(true);
+		if (err == 0) {
+			err = dfu_target_schedule_update(0);
+		}
+
 		if (err != 0) {
 			LOG_ERR("dfu_target_done error: %d",
 				err);

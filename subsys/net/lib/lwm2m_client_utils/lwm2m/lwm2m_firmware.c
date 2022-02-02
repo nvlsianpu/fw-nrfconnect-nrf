@@ -286,6 +286,10 @@ static int firmware_block_received_cb(uint16_t obj_inst_id,
 	if (last_block) {
 		/* Last write to flash should be flush write */
 		ret = dfu_target_done(true);
+		if (err == 0) {
+			err = dfu_target_schedule_update(0);
+		}
+
 		if (ret < 0) {
 			LOG_ERR("dfu_target_done error, err %d", ret);
 			goto cleanup;
