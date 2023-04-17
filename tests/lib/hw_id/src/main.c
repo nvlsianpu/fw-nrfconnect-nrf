@@ -127,8 +127,10 @@ void test_too_small(void)
 
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	/* use the runner from test_runner_generate() */
 	(void)unity_main();
+
+	return 0;
 }

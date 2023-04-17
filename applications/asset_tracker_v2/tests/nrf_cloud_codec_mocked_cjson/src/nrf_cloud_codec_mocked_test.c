@@ -559,7 +559,8 @@ void test_enc_config_nomem1(void)
  */
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+	return 0;
 }

@@ -290,7 +290,9 @@ void test_trace_backend_write_uart_nrfx_uarte_evt_error(void)
 	TEST_ASSERT_EQUAL(true, is_waiting_on_traces);
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

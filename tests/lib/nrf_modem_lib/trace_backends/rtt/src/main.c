@@ -94,7 +94,9 @@ void test_trace_backend_write_rtt(void)
 	trace_backend.write(sample_trace_data, sizeof(sample_trace_data));
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

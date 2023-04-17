@@ -1794,7 +1794,9 @@ void test_nrf91_socket_offload_poll(void)
  */
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

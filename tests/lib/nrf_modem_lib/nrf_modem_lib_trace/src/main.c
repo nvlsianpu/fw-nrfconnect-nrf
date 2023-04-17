@@ -467,7 +467,9 @@ void test_nrf_modem_lib_trace_enotsup(void)
 	trace_backend = trace_backend_orig;
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

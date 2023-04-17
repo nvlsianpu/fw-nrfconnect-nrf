@@ -92,7 +92,9 @@ void test_word_exclude(void)
  */
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

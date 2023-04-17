@@ -45,7 +45,9 @@ void test_uut_init_with_param_check(void)
  */
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

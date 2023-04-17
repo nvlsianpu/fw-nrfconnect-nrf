@@ -90,7 +90,7 @@ void pdn_event_handler(uint8_t cid, enum pdn_event event, int reason)
 	}
 }
 
-void main(void)
+int main(void)
 {
 	int err;
 	int esm;
@@ -106,18 +106,18 @@ void main(void)
 	err = pdn_default_ctx_cb_reg(pdn_event_handler);
 	if (err) {
 		printk("pdn_default_ctx_cb_reg() failed, err %d\n", err);
-		return;
+		return 0;
 	}
 
 	err = lte_lc_init_and_connect();
 	if (err) {
-		return;
+		return 0;
 	}
 
 	err = pdn_default_apn_get(apn, sizeof(apn));
 	if (err) {
 		printk("pdn_default_apn_get() failed, err %d\n", err);
-		return;
+		return 0;
 	}
 
 	printk("Default APN is %s\n", apn);
@@ -126,7 +126,7 @@ void main(void)
 	err = pdn_ctx_create(&cid, pdn_event_handler);
 	if (err) {
 		printk("pdn_ctx_create() failed, err %d\n", err);
-		return;
+		return 0;
 	}
 
 	printk("Created new PDP context %d\n", cid);
@@ -135,7 +135,7 @@ void main(void)
 	err = pdn_ctx_configure(cid, apn, PDN_FAM_IPV4V6, NULL);
 	if (err) {
 		printk("pdn_ctx_configure() failed, err %d\n", err);
-		return;
+		return 0;
 	}
 
 	printk("PDP context %d configured: APN %s, Family %s\n",
@@ -146,7 +146,7 @@ void main(void)
 	if (err) {
 		printk("pdn_activate() failed, err %d esm %d %s\n",
 			err, esm, pdn_esm_strerror(err));
-		return;
+		return 0;
 	}
 
 	printk("PDP Context %d, PDN ID %d\n", 0, pdn_id_get(0));
@@ -156,4 +156,6 @@ void main(void)
 
 	lte_lc_power_off();
 	printk("Bye\n");
+
+	return 0;
 }

@@ -522,7 +522,8 @@ void test_location_fail_init(void)
 	TEST_ASSERT_EQUAL(0, ret);
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+	return 0;
 }

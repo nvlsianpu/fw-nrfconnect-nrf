@@ -1052,9 +1052,11 @@ void test_lte_lc_periodic_search_get_success(void)
  */
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }
 
 SYS_INIT(sys_init_helper, POST_KERNEL, 0);

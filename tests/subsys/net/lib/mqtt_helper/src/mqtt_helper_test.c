@@ -595,7 +595,9 @@ void test_mqtt_helper_poll_loop_pollerr(void)
 	mqtt_helper_poll_loop();
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

@@ -468,7 +468,9 @@ void test_on_publish_invalid_payload(void)
 	TEST_ASSERT_EQUAL(0, k_sem_take(&reg_failed_sem, K_SECONDS(2)));
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

@@ -956,9 +956,11 @@ static int location_test_sys_init(void)
  */
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }
 
 SYS_INIT(location_test_sys_init, POST_KERNEL, 0);

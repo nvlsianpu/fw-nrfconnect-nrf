@@ -640,7 +640,9 @@ void test_azure_iot_hub_method_respond_mqtt_fail(void)
 	TEST_ASSERT_EQUAL(-ENXIO, azure_iot_hub_method_respond(&result));
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

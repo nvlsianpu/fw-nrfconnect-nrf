@@ -267,7 +267,8 @@ void test_memfault_software_watchdog_trigger_on_callback(void)
 	evt.type = WATCHDOG_EVT_FEED;
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+	return 0;
 }

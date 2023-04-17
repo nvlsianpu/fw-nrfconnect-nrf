@@ -408,7 +408,9 @@ void test_modem_info_get_rsrp_success(void)
 
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+
+	return 0;
 }

@@ -381,7 +381,8 @@ void test_lwm2m_integration_fota_update_image_req(void)
 	TEST_ASSERT_EQUAL(UINT8_MAX, last_cb_type);
 }
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+	return 0;
 }

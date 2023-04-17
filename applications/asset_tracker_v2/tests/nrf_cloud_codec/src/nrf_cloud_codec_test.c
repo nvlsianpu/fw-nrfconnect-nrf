@@ -633,7 +633,8 @@ void test_enc_batch_data_ui_toobig(void)
  */
 extern int unity_main(void);
 
-void main(void)
+int main(void)
 {
 	(void)unity_main();
+	return 0;
 }
