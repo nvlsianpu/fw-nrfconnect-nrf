@@ -107,7 +107,7 @@ static void log_fw_version_uuid(void)
 	}
 }
 
-static int _nrf_modem_lib_init(const struct device *unused)
+static int _nrf_modem_lib_init(void)
 {
 	int rc;
 
@@ -145,7 +145,7 @@ int nrf_modem_lib_init(enum nrf_modem_mode mode)
 {
 	init_mode = mode;
 	if (mode == NORMAL_MODE) {
-		return _nrf_modem_lib_init(NULL);
+		return _nrf_modem_lib_init();
 	} else {
 		return nrf_modem_bootloader_init(&bootloader_init_params);
 	}
