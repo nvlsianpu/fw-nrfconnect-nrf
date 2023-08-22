@@ -59,7 +59,7 @@ manifest:
     # https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/zephyr/guides/modules.html
     - name: zephyr
       repo-path: sdk-zephyr
-      revision: 02956222c991e2c036810a5e39fd60e72aa75866
+      revision: pull/1294/head
       import:
         # In addition to the zephyr repository itself, NCS also
         # imports the contents of zephyr/west.yml at the above
@@ -126,7 +126,7 @@ manifest:
           compare-by-default: false
     - name: mcuboot
       repo-path: sdk-mcuboot
-      revision: 54319b44950463936e75b4cf898ba5222083a497
+      revision: pull/271/head
       path: bootloader/mcuboot
     - name: qcbor
       url: https://github.com/laurencelundblade/QCBOR.git
@@ -140,6 +140,7 @@ manifest:
       repo-path: sdk-nrfxlib
       path: nrfxlib
       revision: 8579c4193d47385115e8d465672b099f9b423518
+#      revision: pull/1072/head
     - name: trusted-firmware-m
       repo-path: sdk-trusted-firmware-m
       path: modules/tee/tf-m/trusted-firmware-m
@@ -193,12 +194,12 @@ manifest:
         - sidewalk
     - name: homekit
       repo-path: sdk-homekit
-      revision: 216d6588d069390d2c5291560002ca47684fbfc0
+      revision: pull/475/head
       groups:
         - homekit
     - name: find-my
       repo-path: sdk-find-my
-      revision: c79b9edb3cc6d8ed7d211d7df2d496c43bf47371
+      revision: pull/166/head
       groups:
         - find-my
     - name: azure-sdk-for-c
@@ -237,7 +238,7 @@ manifest:
       remote: throwtheswitch
     - name: memfault-firmware-sdk
       path: modules/lib/memfault-firmware-sdk
-      revision: 0.43.3
+      revision: 1.2.4
       remote: memfault
     - name: ant
       repo-path: sdk-ant
