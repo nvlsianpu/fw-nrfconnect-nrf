@@ -2823,6 +2823,18 @@ Missing :file:`CMakeLists.txt`
   You can `download this file <nRF52820 CMakeLists.txt_>`_ from the upstream Zephyr repository.
   After you add it, the file is automatically included by the build system.
 
+NCSDK-29124: Can't set NSIB signing key using enviroment or comandline value while using childimage for a project.
+  Enviroment value SB_SIGNING_KEY_FILE and comand line value passing under '-DSB_SIGNING_KEY_FILE=<path_to_pem_file> are ignored by build system.
+  Instead auto-generated key is used for signing.
+
+  **Affected platforms:** nRF52 series, nRF5340, nRF91 series
+
+  **Workaround:** Always setting kconfig CONFIG_SB_SIGNING_KEY_FILE value for B0 childimage.
+
+.. rst-clas v2-7-0 v2-6-1 v2-6-0 v2-5-3 v2-5-2 v2-5-1 v2-5-0 v2-4-3 v2-4-2 v2-4-1 v2-4-0 v2-3-0 v2-2-0 v2-1-4 v2-1-3 v2-1-2 v2-1-1 v2-1-0 v2-0-2 v2-0-1 v2-0-0 v1-9-2 v1-9-1 v1-9-0 v1-8-0 v1-7-1 v1-7-0 v1-6-1 v1-6-0
+
+
+
 Bootloader
 ==========
 
