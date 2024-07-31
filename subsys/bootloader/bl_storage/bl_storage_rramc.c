@@ -32,6 +32,7 @@ int get_counter(uint16_t counter_desc, uint32_t *counter_value, const uint32_t *
 
 	slots = counter_obj->counter_slots;
 	num_counter_slots = bl_storage_otp_halfword_read((uint32_t)&counter_obj->num_counter_slots);
+	printk("Number of slots: %d", num_counter_slots);
 
 	for (uint32_t i = 0; i < num_counter_slots; i++) {
 		uint32_t counter = ~nrfx_rramc_otp_word_read(
