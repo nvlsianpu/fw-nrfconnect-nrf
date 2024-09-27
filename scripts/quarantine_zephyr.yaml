@@ -388,3 +388,10 @@
     - nrf54h20dk/nrf54h20/cpuapp
     - nrf54h20dk/nrf54h20/cpurad
   comment: "Won't be fixed, 'rodata will not fit in region FLASH' - no ticket"
+
+- scenarios:
+    - sample.filesystem.fat_fs.nrf54l15pdk:
+  platforms:
+    - nrf54l15dk/nrf54l15/cpuapp
+    - nrf54l15pdk/nrf54l15/cpuapp
+  comment: "partition manager configuration need to be fixed/provided"
