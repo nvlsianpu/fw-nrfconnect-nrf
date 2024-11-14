@@ -61,16 +61,20 @@ source "${ZEPHYR_BASE}/../nrf/subsys/fw_info/Kconfig.template.fw_info_ext_api"
 
 endif # SECURE_BOOT_VALIDATION
 
+config SB_FORCE_VALIDATE_FW_HASH
+	bool "[Experimental only] validate using hash only"
+	default n
+
 config SB_VALIDATE_FW_SIGNATURE
 	bool
-	default y if !SOC_NRF5340_CPUNET
+	default y if !SOC_NRF5340_CPUNET && !SB_FORCE_VALIDATE_FW_HASH
 	help
 	  Signature validation.
 
 config SB_VALIDATE_FW_HASH
 	bool
 	default y
-	depends on SOC_NRF5340_CPUNET
+	depends on SOC_NRF5340_CPUNET || SB_FORCE_VALIDATE_FW_HASH
 	help
 	  Hash validation (not secure). Only meant for nRF5340 network core
 	  since the app core will do the signature validation.
