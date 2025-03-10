@@ -295,6 +295,8 @@ function(${SYSBUILD_CURRENT_MODULE_NAME}_pre_cmake)
           set(mcuboot_secondary_app_QSPI_XIP_IMAGE_NUMBER ${SB_CONFIG_MCUBOOT_QSPI_XIP_IMAGE_NUMBER} CACHE INTERNAL "QSPI XIP image number" FORCE)
         endif()
 
+        set_config_bool(${DEFAULT_IMAGE} CONFIG_NRF_XIP_SPLIT_IMAGE y)
+
         # Flash drivers are mandatory with QSPI XIP split image support
         set_config_bool(${DEFAULT_IMAGE} CONFIG_FLASH y)
         set_config_bool(mcuboot CONFIG_FLASH y)

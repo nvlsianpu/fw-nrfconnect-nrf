@@ -142,3 +142,9 @@ rsource "ext/Kconfig"
 rsource "tests/Kconfig"
 
 endmenu
+
+# hiden
+# intermediate swich for mark nRF specific qspi-xip-split need
+config NRF_XIP_SPLIT_IMAGE
+	bool
+#	default y
