@@ -7,11 +7,23 @@
 / {
 	chosen {
 		zephyr,uart-mcumgr = &cdc_acm_uart0;
+		zephyr,log-uart = &log_uart;
+	};
+
+	log_uart: log_uart {
+		compatible = "zephyr,log-uart";
+		uarts = <&cdc_acm_uart1>;
 	};
 };
 
 &zephyr_udc0 {
 	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+	cdc_acm_uart1: cdc_acm_uart1 {
+		compatible = "zephyr,cdc-acm-uart";
+	};
+	cdc_acm_uart2: cdc_acm_uart2 {
 		compatible = "zephyr,cdc-acm-uart";
 	};
 };
