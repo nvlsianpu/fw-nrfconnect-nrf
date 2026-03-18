@@ -488,6 +488,19 @@ DFU samples
   * Support for using the :ref:`fw_loader_usb_mcumgr` sample with the :ref:`single_slot_sample`.
     You can test this configuration on the :zephyr:board:`nrf54lm20dk` board.
 
+DFU samples
+-----------
+
+* Updated:
+
+  * :ref:`single_slot_sample` sample configuration extended for demonstrate DFU on :zephyr:board:`nrf54lm20dk` with :ref:`fw_loader_ble_mcumgr` firmware loader.
+
+* Added:
+
+  * The :ref:`fw_loader_usb_mcumgr` sample that provides a minimal configuration for firmware loading using SMP over USB CDC ACM Virtual Serial Port. This sample is intended as a starting point for developing custom firmware loader applications that work with the MCUboot bootloader.
+    This firmware loader implementation can be enabled by :kconfig:option:`SB_CONFIG_FIRMWARE_LOADER_IMAGE_USB_MCUMGR` Kconfig option.
+  * Employment of :ref:`fw_loader_usb_mcumgr` as possible to be used by :ref:`single_slot_sample` sample. It can be tested on :zephyr:board:`nrf54lm20dk`.
+
 Edge Impulse samples
 --------------------
 
