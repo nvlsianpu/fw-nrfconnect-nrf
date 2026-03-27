@@ -29,6 +29,9 @@ This sample employs one of alternatives:
 * The :ref:`fw_loader_ble_mcumgr` firmware loader image, which uses the Simple Management Protocol (SMP) over Bluetooth LE.
 * The :ref:`fw_loader_usb_mcumgr` firmware loader image, which uses the USB CDC ACM serial.
 
+This sample can emply the buttonless DFU feature when application can enter the firmware loader mode without the need to hold a button during reset.
+This is achived by enabling SMP MCUmgr grp reset command with boot-mode parameter which need to be set '1' to enter the firmware loader mode.
+
 Building and running
 ********************
 
@@ -36,6 +39,8 @@ Building and running
 
 By default, the sample builds with the :ref:`fw_loader_ble_mcumgr` firmware loader image.
 To build with the :ref:`fw_loader_usb_mcumgr` firmware loader image, append ``FILE_SUFFIX=usb`` to the build command.
+To build the sample desired for the :zephyr:board:`nrf54lm20dk` with the :ref:`fw_loader_usb_mcumgr` firmware loader image and USB buttonless DFU support, append ``FILE_SUFFIX=usb_enter`` to the build command.
+To build the sample desired for the ``nrf54lm20dk/nrf54lm20a/cpuapp`` with the :ref:`fw_loader_usb_mcumgr` firmware loader image and USB buttonless DFU support, append ``FILE_SUFFIX=usb_enter_dongle`` to the build command.
 
 .. include:: /includes/build_and_run.txt
 
@@ -51,7 +56,7 @@ After programming the sample to your development kit, perform the following step
       build time: <BUILD TIME>
 
 #. Build a second version of the sample.
-#. Enter the firmware loader mode by holding the **Button 0** on your development kit while you reset the device.
+#. Enter the firmware loader mode by holding the **Button 0** on your development kit while you reset the device or by sending the reset command with boot-mode parameter set to '1' through MCUmgr.
 
    a. Bluetooth firmware loader:
 
