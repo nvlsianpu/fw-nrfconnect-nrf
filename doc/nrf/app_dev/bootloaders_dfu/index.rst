@@ -12,7 +12,7 @@ Depending on the device, you need to use different bootloader and DFU solutions 
 See the following table for further comparison.
 
 
-   MCUboot and |NSIB| architecture comparison
+   MCUboot and |NSIB| architecture comparison xd
 
 +--------------------------+-------------------------------------------------------------------------+-------------------------------------------------------------------------------------------+
 | Characteristic           | MCUboot                                                                 | nRF Secure Immutable Bootloader                                                           |
