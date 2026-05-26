@@ -74,6 +74,16 @@ function(ncs_secure_boot_mcuboot_sign application bin_files signed_targets prefi
     set(imgtool_extra)
   endif()
 
+  # Set load_address field to the code partition address.
+  # This allows to use the load_address field during image resolution for encrypted images.
+  set(imgtool_set_load_address)
+  sysbuild_get(imgtool_set_load_address IMAGE ${application} VAR CONFIG_NCS_MCUBOOT_IMGTOOL_SET_LOAD_ADDRESS KCONFIG)
+  if(imgtool_set_load_address)
+    dt_chosen(code_partition PROPERTY "zephyr,code-partition" TARGET "${application}")
+    dt_partition_addr(code_partition_address PATH "${code_partition}" TARGET "${application}" ABSOLUTE REQUIRED)
+    set(imgtool_extra ${imgtool_extra} --load-addr ${code_partition_address})
+  endif()
+
   if(NOT "${keyfile}" STREQUAL "")
     set(imgtool_extra -k "${keyfile}" ${imgtool_extra})
   endif()

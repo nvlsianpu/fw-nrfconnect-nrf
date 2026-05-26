@@ -347,6 +347,16 @@ function(mcuboot_sign_merged_nrf54h20 merged_hex main_image merged_images)
     list(APPEND imgtool_depends ${edt_pickle})
   endif()
 
+  # Set load_address field to the code partition address.
+  # This allows to use the load_address field during image resolution for encrypted images.
+  set(imgtool_set_load_address)
+  sysbuild_get(imgtool_set_load_address IMAGE ${main_image} VAR CONFIG_NCS_MCUBOOT_IMGTOOL_SET_LOAD_ADDRESS KCONFIG)
+  if(imgtool_set_load_address)
+    dt_chosen(code_partition PROPERTY "zephyr,code-partition" TARGET "${main_image}")
+    dt_partition_addr(code_partition_address PATH "${code_partition}" TARGET "${main_image}" ABSOLUTE REQUIRED)
+    set(imgtool_args ${imgtool_args} --load-addr ${code_partition_address})
+  endif()
+
   # List of additional build byproducts.
   set(byproducts ${output}.merged.hex)
 
