@@ -124,6 +124,14 @@ function(zephyr_mcuboot_tasks)
     set(imgtool_args ${imgtool_args} --edt-config "${edt_pickle}")
   endif()
 
+  # Set laod_address field to the code partition address.
+  # This allows to use the load_address field during image resolution for encrypted images.
+  if(CONFIG_NCS_MCUBOOT_IMGTOOL_SET_LOAD_ADDRESS)
+    dt_chosen(code_partition PROPERTY "zephyr,code-partition")
+    dt_partition_addr(code_partition_address PATH "${code_partition}" ABSOLUTE REQUIRED)
+    set(imgtool_args ${imgtool_args} --load-addr ${code_partition_address})
+  endif()
+
   # Extensionless prefix of any output file.
   set(output ${ZEPHYR_BINARY_DIR}/${KERNEL_NAME}.signed)
 

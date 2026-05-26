@@ -222,6 +222,14 @@ config NCS_MCUBOOT_MANIFEST_IMAGE_INDEX
 
 endif # NCS_MCUBOOT_MANIFEST_UPDATES
 
+config NCS_MCUBOOT_IMGTOOL_SET_LOAD_ADDRESS
+	bool "Set the load_address field to the code partition address"
+	default y
+	help
+	  The load_address field is set by default only inside the RAM load MCUboot modes.
+	  In other modes, it can be used to resolve the primary slot for a given update candidate
+	  if the secondary slot is shared (i.e. during MCUboot updates).
+
 DT_CHOSEN_Z_CODE_PARTITION := zephyr,code-partition
 DT_NODELABEL_SECONDARY_PARTITION := secondary_app_partition
 DT_NODELABEL_SLOT1_PARTITION := slot1_partition

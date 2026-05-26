@@ -127,6 +127,15 @@ function(zephyr_mcuboot_tasks)
       set(imgtool_rom_command --align ${write_block_size})
     endif()
 
+    # Set laod_address field to the code partition address.
+    # This allows to use the load_address field during image resolution for encrypted images.
+    if(CONFIG_NCS_MCUBOOT_IMGTOOL_SET_LOAD_ADDRESS AND NOT (CONFIG_MCUBOOT_BOOTLOADER_MODE_RAM_LOAD
+       OR CONFIG_MCUBOOT_BOOTLOADER_MODE_RAM_LOAD_WITH_REVERT))
+      dt_chosen(code_partition PROPERTY "zephyr,code-partition")
+      dt_partition_addr(code_partition_address PATH "${code_partition}" ABSOLUTE REQUIRED)
+      set(imgtool_rom_command ${imgtool_rom_command} --load-addr ${code_partition_address})
+    endif()
+
     # TF-M combined images need --pad-header because the MCUboot header gap is
     # at the combined slot start (in tfm_s.hex), not at the NS partition start.
     set(imgtool_pad_header_arg)
