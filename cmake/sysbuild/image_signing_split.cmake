@@ -128,8 +128,9 @@ function(zephyr_mcuboot_tasks)
       set(imgtool_internal_rom_command --rom-fixed ${slot_address})
       set(imgtool_external_rom_command --rom-fixed ${qspi_slot_address})
     endif()
-  elseif(NOT CONFIG_PARTITION_MANAGER_ENABLED AND CONFIG_NCS_MCUBOOT_IMGTOOL_SET_LOAD_ADDRESS)
-    set(imgtool_internal_rom_command --load-addr ${slot_address})
+  elseif(NOT CONFIG_PARTITION_MANAGER_ENABLED AND CONFIG_NCS_MCUBOOT_IMGTOOL_SET_ROM_FIXED_ADDRESS)
+    # Set ih_load_addr to the slot address using --rom-fixed for image matching.
+    set(imgtool_internal_rom_command --rom-fixed ${slot_address})
   endif()
 
   if(CONFIG_PARTITION_MANAGER_ENABLED)

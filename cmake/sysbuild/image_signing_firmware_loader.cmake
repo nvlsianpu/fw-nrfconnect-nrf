@@ -125,12 +125,13 @@ function(zephyr_mcuboot_tasks)
     set(imgtool_args ${imgtool_args} --edt-config "${edt_pickle}")
   endif()
 
-  # Set load_address field to the code partition address.
-  # This allows to use the load_address field during image resolution for encrypted images.
-  if(CONFIG_NCS_MCUBOOT_IMGTOOL_SET_LOAD_ADDRESS)
+  # Set ih_load_addr to the code partition address using --rom-fixed.
+  # This allows MCUboot to match an update candidate to the primary slot when the
+  # secondary slot is shared, including for encrypted images.
+  if(CONFIG_NCS_MCUBOOT_IMGTOOL_SET_ROM_FIXED_ADDRESS)
     dt_chosen(code_partition PROPERTY "zephyr,code-partition")
     dt_partition_addr(code_partition_address PATH "${code_partition}" ABSOLUTE REQUIRED)
-    set(imgtool_args ${imgtool_args} --load-addr ${code_partition_address})
+    set(imgtool_args ${imgtool_args} --rom-fixed ${code_partition_address})
   endif()
 
   # Extensionless prefix of any output file.
