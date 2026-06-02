@@ -275,7 +275,6 @@ function(mcuboot_sign_merged_nrf54h20 merged_hex main_image merged_images)
       math(EXPR start_offset "${start_offset} + ${start_offset_dts}")
       set(pad_header "--pad-header")
     endif()
-    set(imgtool_rom_command --rom-fixed ${slot_addr})
   elseif(SB_CONFIG_MCUBOOT_MODE_FIRMWARE_UPDATER)
     if(CONFIG_MCUBOOT_APPLICATION_FIRMWARE_UPDATER)
       set(slot_size ${slot1_size})
@@ -293,6 +292,21 @@ function(mcuboot_sign_merged_nrf54h20 merged_hex main_image merged_images)
   else()
     message(FATAL_ERROR "Only Direct XIP and firmware updater MCUboot modes are supported.")
     return()
+  endif()
+
+  # Set ih_load_addr using --rom-fixed (${slot_addr}) for both Direct XIP and firmware updater.
+  set(imgtool_rom_command --rom-fixed ${slot_addr})
+
+  # Optional: override with the code partition address when enabled on the main image
+  # (shared secondary slot / encrypted image matching).
+  set(imgtool_set_rom_fixed_address)
+  sysbuild_get(imgtool_set_rom_fixed_address IMAGE ${main_image} VAR
+    CONFIG_NCS_MCUBOOT_IMGTOOL_SET_ROM_FIXED_ADDRESS KCONFIG)
+  if(imgtool_set_rom_fixed_address)
+    dt_chosen(code_partition PROPERTY "zephyr,code-partition" TARGET "${main_image}")
+    dt_partition_addr(code_partition_address PATH "${code_partition}" TARGET "${main_image}"
+      ABSOLUTE REQUIRED)
+    set(imgtool_rom_command --rom-fixed ${code_partition_address})
   endif()
 
   if(SB_CONFIG_NCS_MCUBOOT_LOAD_PERIPHCONF)
@@ -344,16 +358,6 @@ function(mcuboot_sign_merged_nrf54h20 merged_hex main_image merged_images)
     message(STATUS "Passing DTS-based MCUboot configuration: ${mcuboot_configs}")
     set(imgtool_args ${imgtool_args} --edt-config "${edt_pickle}")
     list(APPEND imgtool_depends ${edt_pickle})
-  endif()
-
-  # Set --rom_fixed parameter to the code partition address.
-  # This allows to use the header load_address field during image resolution for encrypted images.
-  set(imgtool_set_rom_fixed_address)
-  sysbuild_get(imgtool_set_rom_fixed_address IMAGE ${main_image} VAR CONFIG_NCS_MCUBOOT_IMGTOOL_SET_ROM_FIXED_ADDRESS KCONFIG)
-  if(imgtool_set_rom_fixed_address)
-    dt_chosen(code_partition PROPERTY "zephyr,code-partition" TARGET "${main_image}")
-    dt_partition_addr(code_partition_address PATH "${code_partition}" TARGET "${main_image}" ABSOLUTE REQUIRED)
-    set(imgtool_args ${imgtool_args} --rom-fixed ${code_partition_address})
   endif()
 
   # List of additional build byproducts.
