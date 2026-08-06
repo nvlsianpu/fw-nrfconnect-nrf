@@ -874,18 +874,6 @@ The code for integrating MCUboot into |NCS| is located in the :file:`ncs/nrf/mod
 
 The following list summarizes both the main changes inherited from upstream MCUboot and the main changes applied to the |NCS| specific additions:
 
-* Added support for the nRF54LC10A SoC.
-
-* The following non-PSA Crypto implementations were deprecated:
-
-  * :kconfig:option:`CONFIG_BOOT_ECDSA_NRF_OBERON`
-  * :kconfig:option:`CONFIG_BOOT_ECDSA_TINYCRYPT`
-  * :kconfig:option:`CONFIG_BOOT_ECDSA_CC310`
-  * :kconfig:option:`CONFIG_BOOT_ED25519_TINYCRYPT`
-  * :kconfig:option:`CONFIG_BOOT_ED25519_MBEDTLS`
-
-  Use their PSA Crypto counterparts instead.
-
 * Added support for multiple image verification keys compiled into MCUboot.
   The :kconfig:option:`CONFIG_BOOT_SIGNATURE_KEY_FILE` Kconfig option accepts a comma-separated list of PEM files.
   Only public key material is embedded in the bootloader image.
