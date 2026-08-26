@@ -86,7 +86,9 @@
 /* Macros to verify different MAC algorithms */
 
 #define VERIFY_ALG_HMAC(_alg) \
-	(IS_ENABLED(PSA_WANT_ALG_HMAC) && _alg == PSA_ALG_HMAC(PSA_ALG_SHA_512))
+	(IS_ENABLED(PSA_WANT_ALG_HMAC) && \
+	 ((IS_ENABLED(PSA_WANT_ALG_SHA_512) && (_alg) == PSA_ALG_HMAC(PSA_ALG_SHA_512)) || \
+	  (IS_ENABLED(PSA_WANT_ALG_SHA_256) && (_alg) == PSA_ALG_HMAC(PSA_ALG_SHA_256))))
 
 /* Macros to verify configuration */
 
